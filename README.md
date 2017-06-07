@@ -2,7 +2,7 @@
 
 This repository contains a short presentation a potential exhibit at the Smithsonian.  
 
-If you are not looking for the repository, but simply the presentation, please see the [hosted version](http://tibbben.github.io/simothsonianSketch/). 
+If you are not looking for the repository, but simply the presentation, please see the [hosted version](https://tibbben.github.io/smithsonianSketch/). 
 
 ---
 
