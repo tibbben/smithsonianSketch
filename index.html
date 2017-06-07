@@ -1,0 +1,126 @@
+<!doctype html>
+<html>
+    <head>
+        <link rel="stylesheet" href="common/css/reveal.css">
+        <link rel="stylesheet" href="common/css/white.css">
+        <link rel="stylesheet" href="common/css/overrides.css">
+        <link rel="stylesheet" href="common/assets/timeline.css"> <!-- for svg rendering -->
+	    <script src="common/java/print.js"></script>
+        <title>Smithsonian Ideas</title>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <div class="reveal">
+            <div class="slides">
+            
+                <section>
+					<div class="fragment fade-out" data-fragment-index="1" style="width: 1400px; height: 780px; position: absolute; top: 10px; left: -15px;"><img src="common/assets/smithsonianSketch.jpg" style="width: 1250px; position: relative; top: 0px; left: 0px; margin: 0px !important"></div>
+					<div class="fragment fade" data-fragment-index="1" style="width: 1400px; height: 780px; position: absolute; top: 10px; left: -15px; overflow: hidden;"><span class="fragment fade-out" data-fragment-index="2"><img src="common/assets/smithsonianSketch.jpg"  style="min-width: 2600px; min-height: 1900px; position: relative; top: -470px; left: -540px; margin: 0px !important"></span></div>
+					<div class="fragment fade-left"  data-fragment-index="2" style="width: 1400px; height: 780px; position: absolute; top: 10px; left: -15px; overflow: hidden;"><span class="fragment fade-out" data-fragment-index="3"><img src="common/assets/smithsonianSketch.jpg"  style="min-width: 2300px; min-height: 1700px; position: relative; top: 0px; left: -50px; margin: 0px !important"></span></div>
+					<div class="fragment fade-left"  data-fragment-index="3" style="width: 1400px; height: 780px; position: absolute; top: 10px; left: -15px; overflow: hidden;"><span class="fragment fade-out" data-fragment-index="4"><img src="common/assets/smithsonianSketch.jpg"  style="min-width: 2300px; min-height: 1700px; position: relative; top: -140px; left: -920px; margin: 0px !important"></span></div>
+					<div class="fragment fade-up"  data-fragment-index="4" style="width: 1400px; height: 780px; position: absolute; top: 10px; left: -15px; overflow: hidden;"><span class="fragment fade-out" data-fragment-index="5"><img src="common/assets/smithsonianSketch.jpg"  style="min-width: 2900px; min-height: 1950px; position: relative; top: -1170px; left: -1430px; margin: 0px !important"></span></div>
+					<div class="fragment fade-right" data-fragment-index="5" style="width: 1400px; height: 780px; position: absolute; top: 10px; left: -15px; overflow: hidden;"><span class="fragment fade-out" data-fragment-index="6"><img src="common/assets/smithsonianSketch.jpg"  style="min-width: 3000px; min-height: 2020px; position: relative; top: -1300px; left: -300px; margin: 0px !important"></span></div>
+					<div class="fragment fade-right" data-fragment-index="6" style="width: 1400px; height: 780px; position: absolute; top: 10px; left: -15px; overflow: hidden;"><img src="common/assets/smithsonianSketch.jpg"  style="min-width: 2000px; min-height: 1500px; position: relative; top: -450px; left: 450px; margin: 0px !important"></div>
+					<div class="fragment fade-in" style="width: 1400px; height: 780px; position: absolute; top: 10px; left: -15px; background-color: #fff"><img src="common/assets/smithsonianSketch.jpg" style="width: 1250px; position: relative; top: 0px; left: 0px; margin: 0px !important"></div>
+		        </section>
+				
+            </div>
+        </div>
+        <script src="common/java/reveal.js"></script>
+	    <script src="common/java/notes.js"></script>
+	    <script src="common/java/head.min.js"></script>
+        <script>
+            Reveal.initialize({
+                width: 1366, height: 768, margin: 0.0,
+                controls: true,
+				progress: true,
+				history: true,
+				center: true,
+				mouseWheel: true,
+				chart: {
+					defaults: { 
+						global: { 
+							defaultFontSize: 20,
+							title: { fontColor: "#333" }, 
+							legend: {
+								position: "top",
+								labels: { fontColor: "#333" },
+							},
+							tooltips: {
+								labels: { fontColor: "#333" },
+							},
+						}, 
+						scale: { 
+							scaleLabel: { fontColor: "#333" }, 
+							gridLines: { color: "#333", zeroLineColor: "#333" }, 
+							ticks: { fontColor: "#333" }, 
+						} 
+					},
+				},
+                dependencies: [
+                    { src: 'common/java/Chart.min.js' },
+                    { src: 'common/java/csv2chart.js' }
+                ] 
+            });
+            /* moveToElements() 
+			/* calculates a center of an SVG group and then moves the positon of the
+			/* SVG to center on that point (specific to the timeline SVG)     */
+			function moveToElements(groupElements) {
+				var bounds=new Array(1300, 0, 768, 0); // (minx, maxx, miny, maxy)
+				bounds = extractBounds(groupElements, bounds);
+				var theSVG = document.getElementById('timelineSVG');
+				theSVG.style.width = '3600px'; 
+				theSVG.style.height = '1508px';
+				var startLeft = parseFloat(theSVG.style.left,10),
+					  startTop = parseFloat(theSVG.style.top,10),
+					  endLeft =  -2.25*((bounds[0]+bounds[1])/2)+800,
+					  endTop = -2.25*((bounds[2]+bounds[3])/2)+335;
+				if (endTop > 15 ) { endTop = 15; }
+				if (endTop < -600 ) { endTop = -600; }
+				var dx = endLeft-startLeft,
+					dy = endTop-startTop;
+				for (var i = 0; i < 200; i++) {
+					theSVG.style.left = (startLeft+i*dx/200)+'px';
+					theSVG.style.top = (startTop+i*dy/200)+'px';	
+				}
+			}
+            /* extractBounds() 
+			/* retrieved the bounds of the text and line elements in a SVG group     */
+			function extractBounds(elements, bounds) {
+				for (var i = 0; i < elements.length; i++ ) {
+					if (elements[i].id != 'ignore') {
+						switch (elements[i].tagName) {
+							case 'line': 
+								if (elements[i].x1.baseVal.value < bounds[0] ) { bounds[0] = elements[i].x1.baseVal.value; } 
+								if (elements[i].x2.baseVal.value > bounds[1] ) { bounds[1] = elements[i].x2.baseVal.value; } 
+								if (elements[i].y1.baseVal.value < bounds[2] ) { bounds[2] = elements[i].y1.baseVal.value; } 
+								if (elements[i].y2.baseVal.value > bounds[3] ) { bounds[3] = elements[i].y2.baseVal.value; } 
+								break;
+							case 'text': 
+								if (elements[i].transform.baseVal.getItem(0).matrix.f < bounds[2]){ bounds[2] = elements[i].transform.baseVal.getItem(0).matrix.f; }
+								if (elements[i].transform.baseVal.getItem(0).matrix.f > bounds[3]){ bounds[3] = elements[i].transform.baseVal.getItem(0).matrix.f; }
+								break;
+							case 'g':
+								bounds = extractBounds(elements[i].children, bounds);
+						}
+						if (bounds[3]-bounds[2] > 200 && bounds[2] < 100) { bounds[3] = 250; }
+					}
+				}
+				return bounds;
+			}
+            /* add event listeners to animate the SVG     */
+			Reveal.addEventListener( 'fragmentshown', function( event ) {
+				groupElements = ( event.fragment.children ? event.fragment.children : event.fragment.childNodes );
+				if (event.fragment.tagName == 'g') {
+					moveToElements(groupElements);
+				}
+			});
+			Reveal.addEventListener( 'fragmenthidden', function( event ) {
+				groupElements = ( event.fragment.children ? event.fragment.children : event.fragment.childNodes );
+				if (event.fragment.tagName == 'g') {
+					moveToElements(groupElements);
+				}
+			});
+        </script>
+    </body>
+</html>
